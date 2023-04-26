@@ -13,7 +13,8 @@ payload = { "prompt": str,
             "url": url
         }
 
-url = "http://localhost:6001/api/get_mj_images_async"
+#url = "http://localhost:6001/api/get_mj_images_async"
+url = "http://bot.aizen.chat:6001/api/get_mj_images_async"
 
 response = requests.post(url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
 print(response.json())

@@ -1,6 +1,6 @@
 # Bundle Stage
 FROM python:3.10.10-slim-buster
-ENV URL_MJ_PROMPT=http://midjourney_api:5000/api/send_and_receive_async
+ENV URL_MJ_PROMPT=http://127.0.0.1:5000/api/send_and_receive_async
 ENV OPENAI_KEY=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
 RUN apt-get update && apt-get install -y ca-certificates
 RUN apt-get install git -y
