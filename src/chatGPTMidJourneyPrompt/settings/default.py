@@ -1,6 +1,7 @@
 prompt_models = {
     "weights": "weights",
     "artistic": "artistic",
+    "midjourney": "midjourney",
 }
 
 types = {
