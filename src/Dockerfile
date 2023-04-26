@@ -1,11 +1,11 @@
 # Bundle Stage
 FROM python:3.10.10-slim-buster
 ENV URL_MJ_PROMPT=http://127.0.0.1:5000/api/send_and_receive_async
-ENV OPENAI_KEY=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
+ENV OPENAI_KEY=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
 RUN apt-get update && apt-get install -y ca-certificates
 RUN apt-get install git -y
 WORKDIR /opt/
-RUN git clone -b wali-v1.0.0 https://oauth2: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@github.com/taotao2008/ChatGPT-MidJourney-prompt.git
+RUN git clone -b wali-v1.0.0 https://github.com/taotao2008/ChatGPT-MidJourney-prompt.git
 WORKDIR /opt/ChatGPT-MidJourney-prompt/src
 RUN git pull
 RUN pip install --no-cache-dir -r requirements.txt
