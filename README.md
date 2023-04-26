@@ -127,6 +127,3 @@ And also [acheong08](https://github.com/acheong08) for creating [ChatGPT](https:
 ## Future
 
 More advanced options for generating prompts
-Run:
-docker build -t wali/chatgpt-midjourney-prompt:v1.0.0 .
-docker run -idt --name chatgpt-midjourney-prompt -p 6001:6001 wali/chatgpt-midjourney-prompt:v1.0.0
