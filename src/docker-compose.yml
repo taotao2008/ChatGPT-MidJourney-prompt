@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  # midjourney_api
+  midjourney_api:
+    image: wali/midjourney_api:v1.0.0
+    ports:
+      - "5000:5000"
+
+  # chatgpt-midjourney-prompt
+  chatgpt-midjourney-prompt:
+    image: wali/chatgpt-midjourney-prompt:v1.0.0
+    ports:
+      - "6001:6001"
+    env_file: .env
+    depends_on:
+      - midjourney_api
