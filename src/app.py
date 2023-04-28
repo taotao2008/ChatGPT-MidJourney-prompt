@@ -5,7 +5,7 @@ import json
 import os
 from concurrent.futures import ThreadPoolExecutor
 import concurrent.futures
-
+import re
 # DOCS https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor
 # 创建线程池执行器
 executor = ThreadPoolExecutor(10)
@@ -90,7 +90,7 @@ def get_mj_images_async():
     # 交由线程去执行耗时任务
     ret_mj = None
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        future_result = executor.submit(get_mj_images, prompt,mj_model,model,url)
+        future_result = executor.submit(get_mj_images, prompt, mj_model, model,url)
         ret_mj = future_result.result()
         print(ret_mj)
 
@@ -120,19 +120,24 @@ def get_mj_images_sync():
 def get_mj_images(prompt,mj_model,model,url):
     global url_mkj_prompt
 
-    prompt_mj = get_mj_prompt(prompt, mj_model, model, url)
     prompt_1 = ""
 
-    prompt_all = prompt_mj
-    prompt_1_start = prompt_all.index("imagine prompt:") + 15
-    prompt_1_tmp = prompt_all[prompt_1_start:]
-    prompt_1_end = prompt_1_tmp.index("imagine prompt:") - 13
-    prompt_1 = prompt_1_tmp[:prompt_1_end]
-    if prompt_1[len(prompt)] == '.':
-        prompt_1 = prompt_1[:-1]
+    if is_chinese_char(prompt):
+        prompt_mj = get_mj_prompt(prompt, mj_model, model, url)
+        prompt_all = prompt_mj
+        prompt_1_start = prompt_all.index("imagine prompt:") + 15
+        prompt_1_tmp = prompt_all[prompt_1_start:]
+        prompt_1_end = prompt_1_tmp.index("imagine prompt:") - 13
+        prompt_1 = prompt_1_tmp[:prompt_1_end]
+        if prompt_1[len(prompt)] == '.':
+            prompt_1 = prompt_1[:-1]
+    else:
+        prompt_1 = prompt
+
 
     if url != "":
         prompt_1 = url + " " + prompt_1
+
 
 
     #调用MJ discord接口
@@ -148,6 +153,20 @@ def get_mj_images(prompt,mj_model,model,url):
     else:
         return {'result': "500"}
 
+
+#
+def is_chinese_char(content_str):
+    ret = False
+    # 定义正则表达式模式
+    pattern = re.compile(u'[\u4e00-\u9fa5]+')
+    # 定义测试字符串
+    # 使用search函数查找字符串中是否包含中文字符
+    result = re.search(pattern, content_str)
+    if result:
+        ret = True
+    else:
+        ret = False
+    return ret
 
 
 if __name__ == "__main__":
