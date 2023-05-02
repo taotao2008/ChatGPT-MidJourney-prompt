@@ -142,7 +142,7 @@ def get_mj_images(prompt,mj_model,model,url):
 
     #调用MJ discord接口
     payload_mj = {"prompt": prompt_1}
-    print(payload_mj)
+
     response_mj = requests.post(URL_MJ_PROMPT, data=json.dumps(payload_mj), headers={'Content-Type': 'application/json'})
     ret_mj = response_mj.json()
     if response_mj.status_code == 200:
@@ -154,7 +154,7 @@ def get_mj_images(prompt,mj_model,model,url):
         return {'result': "500"}
 
 
-#
+#检查是否包含中文
 def is_chinese_char(content_str):
     ret = False
     # 定义正则表达式模式
