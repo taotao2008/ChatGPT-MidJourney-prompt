@@ -126,4 +126,6 @@ And also [acheong08](https://github.com/acheong08) for creating [ChatGPT](https:
 
 ## Future
 
-More advanced options for generating prompts
+
+docker build --no-cache -f Dockerfile -t wali/chatgpt_midjourney_prompt:v1.3 .
+docker run -idt --name chatgpt-midjourney-prompt -p 6001:6001 --env URL_MJ_PROMPT=http://mj-api.aizen.chat:5000/api/send_and_receive --env OPENAI_KEY=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 wali/chatgpt_midjourney_prompt:v1.3
