@@ -129,7 +129,7 @@ def get_mj_images(prompt,mj_model,model,url):
         prompt_1_tmp = prompt_all[prompt_1_start:]
         prompt_1_end = prompt_1_tmp.index("imagine prompt:") - 13
         prompt_1 = prompt_1_tmp[:prompt_1_end]
-        if prompt_1[len(prompt)] == '.':
+        if prompt_1[len(prompt_1) - 1] == '.':
             prompt_1 = prompt_1[:-1]
     else:
         prompt_1 = prompt
